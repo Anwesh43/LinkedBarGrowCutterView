@@ -1,0 +1,3 @@
+include ':bargrowcutterview'
+include ':app'
+rootProject.name = "LinkedBarGrowCutterView"
