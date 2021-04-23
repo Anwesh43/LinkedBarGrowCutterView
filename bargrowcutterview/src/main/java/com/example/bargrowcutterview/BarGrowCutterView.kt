@@ -201,4 +201,13 @@ class BarGrowCutterView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : BarGrowCutterView {
+            val view : BarGrowCutterView = BarGrowCutterView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
