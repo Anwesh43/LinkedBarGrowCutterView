@@ -18,9 +18,8 @@ val colors : Array<Int> = arrayOf(
 ).map {
     Color.parseColor(it)
 }.toTypedArray()
-val parts : Int = 2
+val parts : Int = 3
 val scGap : Float = 0.02f / parts
-val strokeFactor : Float = 90f
 val delay : Long = 20
 val backColor : Int = Color.parseColor("#BDBDBD")
 val sizeFactor : Float = 2.9f
@@ -35,12 +34,14 @@ fun Canvas.drawBarGrowCutter(i : Int, scale : Float, w : Float, h : Float, paint
     val sf : Float = scale.sinify()
     val sf1 : Float = sf.divideScale(0, parts)
     val sf2 : Float = sf.divideScale(1, parts)
+    val sf3 : Float = sf.divideScale(2, parts)
     save()
     translate(w / 2, h / 2)
+    rotate(90f * sf3)
     paint.color = colors[i]
     drawRect(RectF(-size / 2, -size / 2, -size / 2 + size * sf1, size / 2), paint)
     paint.color = backColor
-    drawArc(RectF(0f, -size / 2, size, size / 2), 180f, 180f * sf2, true, paint)
+    drawArc(RectF(0f, -size / 2, size, size / 2), 90f, 180f * sf2, true, paint)
     restore()
 }
 
