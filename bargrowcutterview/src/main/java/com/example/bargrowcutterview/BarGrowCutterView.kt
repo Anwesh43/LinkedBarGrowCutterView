@@ -29,3 +29,23 @@ fun Int.inverse() : Float = 1f / this
 fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse())
 fun Float.divideScale(i : Int, n : Int) : Float = Math.min(n.inverse(), maxScale(i, n)) * n
 fun Float.sinify() : Float = Math.sin(this * Math.PI).toFloat()
+
+fun Canvas.drawBarGrowCutter(i : Int, scale : Float, w : Float, h : Float, paint : Paint) {
+    val size : Float = Math.min(w, h) / sizeFactor
+    val sf : Float = scale.sinify()
+    val sf1 : Float = sf.divideScale(0, parts)
+    val sf2 : Float = sf.divideScale(1, parts)
+    save()
+    translate(w / 2, h / 2)
+    paint.color = colors[i]
+    drawRect(RectF(-size / 2, -size / 2, -size / 2 + size * sf1, size / 2), paint)
+    paint.color = backColor
+    drawArc(RectF(0f, -size / 2, size, size / 2), 180f, 180f * sf2, true, paint)
+    restore()
+}
+
+fun Canvas.drawBGCNode(i : Int, scale : Float, paint : Paint) {
+    val w : Float = width.toFloat()
+    val h : Float = height.toFloat()
+    drawBarGrowCutter(i, scale, w, h, paint)
+}
